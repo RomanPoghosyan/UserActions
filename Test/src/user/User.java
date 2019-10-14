@@ -1,8 +1,6 @@
 package user;
 
-import test.Admin;
-
-public class User extends Admin {
+public class User {
     public int id;
     public User(int id){
         this.id = id;

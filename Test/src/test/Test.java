@@ -4,17 +4,17 @@ import user.User;
 
 public class Test {
     public static void main(String args[]) {
-        int id = 17;
-        User u = new User(id);
-        if(u.id == -1){
-            UserFunctionality user = u;
-            //u.getBalance ERROR
-            u.setBalance(100);
-        }else {
-            User user = u;
-            u.setBalance(500);
-            int balance = u.getBalance(u.id);
-            System.out.println(balance);
-        }
+        User u = new User(17);
+
+        Account a = new Account(u);
+        a.setBalance(500);
+        System.out.println(a.getBalance());
+
+        User u2 = new User();
+
+        a = new Account(u2);
+
+        a.setBalance(1000);
+        System.out.println(a.getBalance());
     }
 }
