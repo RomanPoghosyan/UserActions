@@ -2,40 +2,44 @@ package test;
 
 import user.User;
 
+import java.util.Arrays;
+
 class Account {
     private int balance;
-    private int id = 17;
+    private Integer ids[] = {5,45,88};
     private boolean authorized = false;
     private boolean frozen = false;
 
-    Account(User user){
-        if(user.id == this.id){
-            authorized = true;
+
+    private boolean isAuthorized(User u){
+        int index = Arrays.asList(ids).indexOf(u.id);
+        if(!frozen && index != -1){
+            return true;
+        } else {
+            return false;
         }
     }
 
-    private boolean isAuthorized(){
-        return !frozen && authorized;
+    public int getBalance(User u){
+        return isAuthorized(u) ? balance : 0;
     }
 
-    public int getBalance(){
-        return isAuthorized() ? balance : 0;
+    public void setBalance(User u, int value) {
+        if(isAuthorized(u)) {
+            balance += value;
+        }
     }
 
-    public void setBalance(int value) {
-        balance += value;
-    }
-
-    public int takeBalance(int value){
-        if(isAuthorized()) {
+    public int takeBalance(User u, int value){
+        if(isAuthorized(u)) {
             balance -= value;
             return value;
         }
         return 0;
     }
 
-    public void freeze(int userId){
-        if(isAuthorized()) {
+    public void freeze(User u, int userId){
+        if(isAuthorized(u)) {
             frozen = true;
         }
     }
